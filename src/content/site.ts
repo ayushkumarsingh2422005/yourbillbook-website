@@ -5,7 +5,12 @@ export const site = {
   packageName: "com.digicraft.yourbillbook",
   tagline: "Offline billing for your shop. Pay once. Use forever.",
   shortDescription:
-    "Offline billing, stock & Khata for your shop. Pay once. Works without internet.",
+    "Offline billing, stock & Khata for shops and cafés, with tables and KOT for restaurants. Pay once. Works without internet.",
+  /**
+   * One-time Google Play price in rupees. Leave null until it is set in Play Console;
+   * every "Pay once" line on the site picks it up automatically.
+   */
+  price: null as number | null,
   supportEmail: "support@digicraft.one",
   publisher: "DigiCraft",
   publisherUrl: "https://digicraft.one",
@@ -48,6 +53,11 @@ export const features = [
     icon: "offline",
   },
   {
+    title: "Restaurant & café mode",
+    body: "Tables floor, KOT to the kitchen on the same printer, edit and reprint tickets, then bill the table.",
+    icon: "kot",
+  },
+  {
     title: "Pay once",
     body: "One Google Play purchase. Same account can reinstall forever — no subscription.",
     icon: "pay",
@@ -55,8 +65,13 @@ export const features = [
 ] as const;
 
 export const nav = [
+  { href: "/restaurant", label: "Restaurant & Café" },
   { href: "/features", label: "Features" },
   { href: "/support", label: "Support" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
 ] as const;
+
+/** "₹149 one-time" once a price is set, otherwise a neutral fallback. */
+export const priceLabel = (fallback = "One-time price") =>
+  site.price != null ? `₹${site.price.toLocaleString("en-IN")} one-time` : fallback;

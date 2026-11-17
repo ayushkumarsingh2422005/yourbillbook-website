@@ -157,3 +157,41 @@ export const IconRotate = (p: IconProps) => (
     <path d="M4 4v4.6h4.6" />
   </Base>
 );
+
+export const IconTable = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M3 8h18" />
+    <path d="M6 8l-1.5 11M18 8l1.5 11" />
+    <path d="M7.5 13h9" />
+  </Base>
+);
+
+export const IconCloche = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M4 17a8 8 0 0 1 16 0" />
+    <path d="M2.5 17h19" />
+    <path d="M12 9V7.4" />
+    <circle cx="12" cy="6.4" r="1" />
+  </Base>
+);
+
+export const IconTicket = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M6 3h12v18l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4L6 21z" />
+    <path d="M9 8h6M9 11.5h6M9 15h3.5" />
+  </Base>
+);
+
+export const IconBag = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M5 8h14l-1 12H6z" />
+    <path d="M9 8V6.5a3 3 0 0 1 6 0V8" />
+  </Base>
+);
+
+export const IconToggle = (p: IconProps) => (
+  <Base {...p}>
+    <rect x="2.5" y="7" width="19" height="10" rx="5" />
+    <circle cx="16.5" cy="12" r="3" fill="currentColor" />
+  </Base>
+);

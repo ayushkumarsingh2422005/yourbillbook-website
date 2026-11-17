@@ -18,8 +18,8 @@ export default function SupportPage() {
         Support
       </h1>
       <p className="mt-3 text-base leading-relaxed text-[var(--ybb-muted)]">
-        We&apos;re here for install, license, backup, and printer questions for
-        YourBillBook.
+        We&apos;re here for install, license, backup, printer and restaurant-mode
+        questions for YourBillBook.
       </p>
 
       <div className="mt-10 space-y-4">
@@ -55,6 +55,14 @@ export default function SupportPage() {
             <li>
               <strong>Printer:</strong> pair in Android Bluetooth settings, then
               More → Printers.
+            </li>
+            <li>
+              <strong>Restaurant / café mode:</strong> turn it on in More →
+              Store details. KOTs print on the same printer as bills. Settle open
+              tables before switching back to shop mode.{" "}
+              <Link href="/restaurant" className="font-semibold text-[var(--ybb-primary)]">
+                How it works
+              </Link>
             </li>
             <li>
               <strong>StoreMitr:</strong> cloud / multi-store help is handled by{" "}

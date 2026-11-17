@@ -23,15 +23,16 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-6 md:flex" aria-label="Primary">
           <Link
             href="/#try"
-            className="text-sm font-semibold text-[var(--ybb-ink)] underline decoration-[var(--ybb-marigold)] decoration-2 underline-offset-4"
+            className="whitespace-nowrap text-sm font-semibold text-[var(--ybb-ink)] underline decoration-[var(--ybb-marigold)] decoration-2 underline-offset-4"
           >
             Try a bill
           </Link>
-          {nav.map((item) => (
+          {/* Privacy and Terms live in the footer; the header keeps the product links. */}
+          {nav.filter((item) => item.href !== "/privacy" && item.href !== "/terms").map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-[var(--ybb-muted)] transition hover:text-[var(--ybb-primary)]"
+              className="whitespace-nowrap text-sm font-medium text-[var(--ybb-muted)] transition hover:text-[var(--ybb-primary)]"
             >
               {item.label}
             </Link>
@@ -51,7 +52,7 @@ export function SiteHeader() {
             href={site.playUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-[var(--ybb-primary)] px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--ybb-primary-dark)]"
+            className="whitespace-nowrap rounded-full bg-[var(--ybb-primary)] px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--ybb-primary-dark)]"
           >
             Get on Play
           </Link>

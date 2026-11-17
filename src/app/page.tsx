@@ -15,11 +15,13 @@ import {
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { PlayBadge } from "@/components/PlayBadge";
 import { Reveal } from "@/components/Reveal";
-import { site } from "@/content/site";
+import { Ticker } from "@/components/Ticker";
+import { priceLabel, site } from "@/content/site";
 
 const shopTypes = [
   "Kirana",
   "General store",
+  "Café",
   "Medical",
   "Stationery",
   "Hardware",
@@ -28,7 +30,9 @@ const shopTypes = [
   "Mobile accessories",
   "Cosmetics",
   "Pan shop",
+  "Chai stall",
   "Bakery",
+  "Dhaba",
   "Footwear",
 ];
 
@@ -53,6 +57,11 @@ const faqs = [
   {
     q: "Can two phones or two shops share the same data?",
     a: "No. YourBillBook is one phone and one store, on purpose. If you need staff logins, more than one store or cloud sync, StoreMitr is our app built for that.",
+  },
+  {
+    q: "I run a café or small restaurant. Will it work for me?",
+    a: "Yes. Pick Restaurant / cafe when you set up the store, or switch later from More → Store details. You get a tables floor, KOT printed to the kitchen on the same printer, and table-wise billing.",
+    link: { href: "/restaurant", label: "See restaurant mode" },
   },
   {
     q: "Is the app available in Hindi?",
@@ -96,7 +105,11 @@ export default function HomePage() {
             <ul className="mt-7 space-y-3">
               {[
                 { icon: IconWifiOff, strong: "No internet needed", rest: "for billing, stock or khata" },
-                { icon: IconInfinity, strong: "Pay once", rest: "on Google Play. No monthly fee." },
+                {
+                  icon: IconInfinity,
+                  strong: "Pay once",
+                  rest: site.price != null ? `· ${priceLabel()} on Google Play` : "on Google Play. No monthly fee.",
+                },
                 { icon: IconPrinter, strong: "Prints receipts", rest: "on 58, 80 and 112 mm Bluetooth printers" },
               ].map(({ icon: Icon, strong, rest }) => (
                 <li key={strong} className="flex items-center gap-3 text-[15px] text-[var(--ybb-muted)]">
@@ -155,25 +168,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ================= SHOP TICKER ================= */}
-      <section aria-label="Shops that use a counter" className="relative py-3">
-        <div className="zigzag-y -rotate-1 bg-[var(--ybb-receipt)] py-4 shadow-[0_10px_30px_-20px_rgba(60,40,0,0.5)]">
-          <div className="ticker flex overflow-hidden">
-            <div className="ticker-track flex w-max shrink-0 font-mono text-sm font-bold uppercase tracking-[0.18em] text-[var(--ybb-ink)]/75">
-              {[0, 1].map((half) => (
-                <div key={half} aria-hidden={half === 1} className="flex shrink-0 items-center">
-                  {[...shopTypes, ...shopTypes].map((s, i) => (
-                    <span key={i} className="flex items-center gap-8 whitespace-nowrap pr-8">
-                      {s}
-                      <span className="text-[var(--ybb-primary)]">✶</span>
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <Ticker items={shopTypes} label="Shops that use a counter" />
 
       {/* ================= TRY A BILL ================= */}
       <section id="try" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
@@ -280,7 +275,7 @@ export default function HomePage() {
               h: 900,
               kicker: "Pay once",
               title: "Buy it once. That's all.",
-              body: "One Google Play purchase. Reinstall free on the same Google account. Nothing to renew.",
+              body: `${site.price != null ? `${priceLabel()} on Google Play` : "One Google Play purchase"}. Reinstall free on the same Google account. Nothing to renew.`,
             },
             {
               img: "/img/art/backup.webp",
@@ -327,6 +322,44 @@ export default function HomePage() {
         </Reveal>
       </section>
 
+      {/* ================= CAFÉ TEASER ================= */}
+      <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6 lg:pb-28">
+        <Reveal>
+          <Link
+            href="/restaurant"
+            className="group grid items-center overflow-hidden rounded-[1.75rem] border border-[var(--ybb-border)] bg-[var(--ybb-surface)] transition hover:-translate-y-1 hover:shadow-[0_30px_50px_-35px_rgba(60,40,0,0.5)] md:grid-cols-[1fr_1.1fr]"
+          >
+            <div className="p-7 sm:p-9">
+              <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[var(--ybb-primary)]">
+                Restaurant &amp; café mode
+              </p>
+              <h2 className="mt-3 font-display text-3xl font-semibold leading-tight tracking-tight text-[var(--ybb-ink)] sm:text-4xl">
+                Run a café? Turn on restaurant mode.
+              </h2>
+              <p className="mt-3 max-w-md leading-relaxed text-[var(--ybb-muted)]">
+                Tables, KOT to the kitchen on the same printer, and table-wise bills. Same app,
+                same one-time purchase.
+              </p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[var(--ybb-ink)]">
+                <span className="underline decoration-[var(--ybb-marigold)] decoration-2 underline-offset-4">
+                  See how it works
+                </span>
+                <IconArrowRight size={16} className="transition group-hover:translate-x-1" />
+              </span>
+            </div>
+            <div className="relative aspect-[2/1] h-full w-full overflow-hidden md:aspect-auto md:min-h-[260px]">
+              <Image
+                src="/img/resto/art/switch.webp"
+                alt="A toggle switch sliding from a kirana shelf to a café table"
+                fill
+                sizes="(min-width: 768px) 560px, 100vw"
+                className="object-cover transition duration-500 group-hover:scale-105"
+              />
+            </div>
+          </Link>
+        </Reveal>
+      </section>
+
       {/* ================= YBB vs STOREMITR ================= */}
       <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6 lg:pb-28">
         <Reveal className="max-w-2xl">
@@ -345,7 +378,7 @@ export default function HomePage() {
               tone: "var(--ybb-primary)",
               logo: "/brand/logo-mark.png",
               rows: [
-                ["Payment", "One-time on Play"],
+                ["Payment", site.price != null ? `${priceLabel()} on Play` : "One-time on Play"],
                 ["Data", "On this phone"],
                 ["Stores", "One"],
                 ["Team", "Just you"],
